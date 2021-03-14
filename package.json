@@ -7,15 +7,17 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.1",
+    "react-context-devtool": "^2.0.3",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run watch:css && react-scripts start",
+    "build": "npm run watch:css && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +36,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "formik": "^2.2.6",
+    "postcss": "^8.2.8",
+    "postcss-cli": "^8.3.1",
+    "react-modal": "^3.12.1",
+    "sass": "^1.32.8",
+    "sweetalert2": "^10.15.5",
+    "tailwindcss": "^2.0.3",
+    "yup": "^0.32.9"
   }
 }
