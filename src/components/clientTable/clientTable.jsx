@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
+import moment from "moment";
 import "./clientTable.scss"
 
 import { useClientContext } from "common/context/ClientContext"
 
 const ClientTable = () => {
 
-    const { clients, activeClient, setActiveClient } = useClientContext()
+    const { clients = [], search, searchedClients = [], activeClient, setActiveClient } = useClientContext()
 
     const getFullAddress = (address) => {
         return `${ address.descripcion } ${ address.barrio }, ${ address.ciudad }`
@@ -24,18 +25,24 @@ const ClientTable = () => {
                 </thead>
                 <tbody>
                     { 
-                        clients.map(({ identificacion, nombres, apellidos, direcciones }, index)=>(
-                            <tr 
-                                key={ index }
-                                onClick={ ()=> setActiveClient( clients[index] ) }
-                                className={ `cursor-pointer ${ activeClient.identificacion===identificacion?"bg-blue-100":"hover:bg-gray-50" }` }
-                            >
-                                <td>{ identificacion }</td>
-                                <td>{ nombres } { apellidos }</td>
-                                <td className="text-center">21</td>
-                                <td>{ getFullAddress(direcciones[0]) }</td>
+                        (!clients.length || !searchedClients.length)?(
+                            <tr>
+                                <td colSpan="20" className="text-center font-medium text-xl">No se encontraron resultados</td>
                             </tr>
-                        ))
+                        ):(
+                            ( search.length? searchedClients: clients).map(({ identificacion, nombres, apellidos, fechaNacimiento, direcciones }, index)=>(
+                                <tr 
+                                    key={ index }
+                                    onClick={ ()=> setActiveClient( clients[index] ) }
+                                    className={ `cursor-pointer ${ activeClient.identificacion===identificacion?"bg-blue-100":"hover:bg-gray-50" }` }
+                                >
+                                    <td>{ identificacion }</td>
+                                    <td>{ nombres } { apellidos }</td>
+                                    <td className="text-center">{ fechaNacimiento?moment().diff(fechaNacimiento, 'years'):"" }</td>
+                                    <td>{ getFullAddress(direcciones[0]) }</td>
+                                </tr>
+                            ))
+                        )
                     }
                 </tbody>
             </table>

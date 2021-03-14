@@ -11,8 +11,8 @@ const AddClient = () => {
     const { clients, setClients, activeClient, isUserActive } = useClientContext()
 
     const updateClient = (client) => {
-        const index = clients.findIndex( ({ identificacion}) => identificacion == activeClient.identificacion)
-        if(index != -1){
+        const index = clients.findIndex( ({ identificacion}) => identificacion === activeClient.identificacion)
+        if(index !== -1){
             setClients(clients.map( (nClient, nIndex) =>  nIndex === index? client: nClient  ))
         }
 

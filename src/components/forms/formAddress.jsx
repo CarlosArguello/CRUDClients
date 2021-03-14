@@ -15,7 +15,7 @@ const FormAddress = ({ direcciones = [], isSubmit, onSubmit }) => {
         barrio: yup.string().required("Requerido"),
         descripcion: yup.string().required("Requerido"),
         tipo: yup.string().required("Requerido").when('direcciones', (direcciones, tipo) => {
-            return tipo.test("mainType", "Ya tienes sede principal", ()=> !direcciones.filter( address => address.tipo == 'principal').length )
+            return tipo.test("mainType", "Ya tienes sede principal", ()=> !direcciones.filter( address => address.tipo === 'principal').length )
         })
     });
 

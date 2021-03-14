@@ -10,7 +10,7 @@ const DeleteClient = () => {
 
     const deleteClient = () => {
         setClients(
-            clients.filter(client => client.identificacion != activeClient.identificacion)
+            clients.filter(client => client.identificacion !== activeClient.identificacion)
         )
         Swal.fire({
             icon: 'success',    

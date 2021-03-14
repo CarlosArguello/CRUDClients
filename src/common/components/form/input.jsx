@@ -17,7 +17,7 @@ const Input = ({ label, type, error, messageError, typeError = "danger", childre
         <div className="flex flex-col w-full">
             <label className="text-sm font-bold text-gray-600 mb-2">{ label }</label>
             {
-                type == "select"?(
+                type === "select"?(
                     <select
                         { ...props }
                         className={`px-4 h-12 border rounded-md bg-white ${error?`border-${colorError}-500`:""}`}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -11,7 +11,7 @@ import FormAddress from "components/forms/formAddress"
 
 import { useClientContext } from "common/context/ClientContext"
 
-const FormClient = ({ identificacion = "", nombres = "", apellidos = "", emails = [], direcciones = [], onSubmit }) => {
+const FormClient = ({ identificacion = "", nombres = "", apellidos = "", fechaNacimiento = "", emails = [], direcciones = [], onSubmit }) => {
     
     const { getIDs } = useClientContext()
 
@@ -35,7 +35,8 @@ const FormClient = ({ identificacion = "", nombres = "", apellidos = "", emails 
             nombres,
             apellidos,
             emails,
-            direcciones
+            direcciones,
+            fechaNacimiento
         },
         validationSchema: ClientSchema,
         onSubmit,
@@ -46,17 +47,28 @@ const FormClient = ({ identificacion = "", nombres = "", apellidos = "", emails 
         className="space-y-4"
         onSubmit={ formClient.handleSubmit }
         >
-            <div className="w-2/5">
+            <div className="flex">
+                <div className="w-2/5 pr-3">
 
+                    <Input 
+                        type="number"
+                        name="identificacion"
+                        label="Identificación"
+                        onChange={ formClient.handleChange }
+                        value={ formClient.values.identificacion }
+                        messageError={ formClient.errors.identificacion }
+                        error={ formClient.errors.identificacion && formClient.touched.identificacion }
+                        disabled={ identificacion }
+                    />
+                </div>
                 <Input 
-                    type="number"
-                    name="identificacion"
-                    label="Identificación"
+                    type="date"
+                    name="fechaNacimiento"
+                    label="Fecha de nacimiento"
                     onChange={ formClient.handleChange }
-                    value={ formClient.values.identificacion }
-                    messageError={ formClient.errors.identificacion }
-                    error={ formClient.errors.identificacion && formClient.touched.identificacion }
-                    disabled={ identificacion }
+                    value={ formClient.values.fechaNacimiento }
+                    messageError={ formClient.errors.fechaNacimiento }
+                    error={ formClient.errors.fechaNacimiento && formClient.touched.fechaNacimiento }
                 />
             </div>
             <div className="flex">

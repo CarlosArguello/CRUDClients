@@ -5,6 +5,8 @@ const ClientContext = createContext()
 export const ClientProvider = ({ children }) => {
     const [ init, setInit ] = useState(false)
     const [ clients, setClients ] = useState([])
+    const [ searchedClients, setSearchedClients ] = useState([])
+    const [ search, setSearch ] = useState("")
     const [ isUserActive, setIsUserActive ] = useState(false)
     const [ activeClient, setActiveClient ] = useState({})
 
@@ -12,19 +14,33 @@ export const ClientProvider = ({ children }) => {
 
     //CARGAR DATA
     useEffect(()=>{
-        setClients(JSON.parse(localStorage.getItem("clients")))
+        const storageClient = localStorage.getItem("clients")
+        if(storageClient){
+            setClients(JSON.parse(storageClient))
+        }
         setInit(true)
-    }, [])
+    }, [ ])
+
+    //BUSCAR CLIENTES
+    useEffect(()=>{
+        const searchDataClient = clients.filter( 
+            ({ identificacion = "", nombres, apellidos }) => (
+                String(identificacion).includes(search)  || `${nombres} ${ apellidos}`.includes(search)
+            )
+        )
+        setSearchedClients(searchDataClient)
+    }, [ search, init ])
 
     //(BOOLEAN) CUANDO EL CLIENTE ESTE ACTIVO
     useEffect(()=>{
         setIsUserActive(!!Object.keys(activeClient).length)
     }, [ activeClient ])
 
-    //CUADNO EL CLIENTE CAMBIE ACTUALIZAR EL LOCAL STORAGE
+    //CUANDO EL CLIENTE CAMBIE ACTUALIZAR EL LOCAL STORAGE
     useEffect(()=>{
         if(init) {
             localStorage.setItem("clients", JSON.stringify(clients))
+            setSearch("")
         }
     }, [ clients ])
 
@@ -33,14 +49,23 @@ export const ClientProvider = ({ children }) => {
     }
 
     const value = useMemo(() => ({
+        
         clients,
         setClients,
+        
+        search,
+        setSearch,
+        searchedClients,
+
         activeClient,
         setActiveClient,
+
         clearActiveClient,
         isUserActive,
+
         getIDs
-    }), [ clients, activeClient, isUserActive ])
+
+    }), [ clients, activeClient, isUserActive, search, searchedClients ])
 
     return <ClientContext.Provider value={ value }>{ children }</ClientContext.Provider>
 }
