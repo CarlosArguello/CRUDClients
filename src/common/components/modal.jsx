@@ -9,7 +9,9 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    border                : "none"
+    border                : "none",
+    maxHeight             : "100vh",
+    padding               : "0"
   }
 };
  
@@ -23,7 +25,7 @@ const Modal = ({ children, isOpen, onClose }) => {
         style={customStyles}
       >
         <div 
-          className="max-w-full rounded-md shadow-md p-6"
+          className="max-w-full rounded-md shadow-md border p-6"
           style={{ width: 800 }}
         >
           { children }
