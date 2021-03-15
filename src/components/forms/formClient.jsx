@@ -26,7 +26,9 @@ const FormClient = ({ identificacion = "", nombres = "", apellidos = "", fechaNa
 
         }),
         nombres: yup.string().required("Requerido"),
-        apellidos: yup.string().required("Requerido")
+        apellidos: yup.string().required("Requerido"),
+        emails: yup.array().min(1), 
+        direcciones: yup.array().min(1)
     });
 
     const formClient = useFormik({

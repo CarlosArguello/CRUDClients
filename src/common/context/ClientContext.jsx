@@ -19,7 +19,7 @@ export const ClientProvider = ({ children }) => {
             setClients(JSON.parse(storageClient))
         }
         setInit(true)
-    }, [ ])
+    }, [])
 
     //BUSCAR CLIENTES
     useEffect(()=>{
@@ -30,7 +30,7 @@ export const ClientProvider = ({ children }) => {
         )
         setSearchedClients(searchDataClient)
         // eslint-disable-next-line
-    }, [ search, init ])
+    }, [ search, clients ])
 
     //(BOOLEAN) CUANDO EL CLIENTE ESTE ACTIVO
     useEffect(()=>{

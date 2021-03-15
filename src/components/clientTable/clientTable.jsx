@@ -25,11 +25,7 @@ const ClientTable = () => {
                 </thead>
                 <tbody>
                     { 
-                        (!clients.length || !searchedClients.length)?(
-                            <tr>
-                                <td colSpan="20" className="text-center font-medium text-xl">No se encontraron resultados</td>
-                            </tr>
-                        ):(
+                        (clients.length && searchedClients.length)?(
                             ( search.length? searchedClients: clients).map(({ identificacion, nombres, apellidos, fechaNacimiento, direcciones }, index)=>(
                                 <tr 
                                     key={ index }
@@ -42,6 +38,10 @@ const ClientTable = () => {
                                     <td>{ getFullAddress(direcciones[0]) }</td>
                                 </tr>
                             ))
+                        ):(
+                            <tr>
+                                <td colSpan="20" className="text-center font-medium text-xl">No se encontraron resultados</td>
+                            </tr>
                         )
                     }
                 </tbody>
