@@ -29,6 +29,7 @@ export const ClientProvider = ({ children }) => {
             )
         )
         setSearchedClients(searchDataClient)
+        // eslint-disable-next-line
     }, [ search, init ])
 
     //(BOOLEAN) CUANDO EL CLIENTE ESTE ACTIVO
@@ -42,6 +43,7 @@ export const ClientProvider = ({ children }) => {
             localStorage.setItem("clients", JSON.stringify(clients))
             setSearch("")
         }
+    // eslint-disable-next-line
     }, [ clients ])
 
     const getIDs = () => {
@@ -64,7 +66,7 @@ export const ClientProvider = ({ children }) => {
         isUserActive,
 
         getIDs
-
+    // eslint-disable-next-line
     }), [ clients, activeClient, isUserActive, search, searchedClients ])
 
     return <ClientContext.Provider value={ value }>{ children }</ClientContext.Provider>

@@ -32,6 +32,7 @@ const FormEmail = ({ emails = [], isSubmit, onSubmit }) => {
 
     useEffect(()=>{
         if(isSubmit) formEmail.handleSubmit()
+        // eslint-disable-next-line
     }, [ isSubmit ])
 
     const removeEmail = (index) => {
