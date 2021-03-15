@@ -6,12 +6,15 @@ import Button from "common/components/form/button"
 
 const DeleteClient = () => {
 
-    const { clients, setClients, activeClient, isUserActive } = useClientContext()
+    const { clients, setClients, activeClient, isUserActive, clearActiveClient } = useClientContext()
 
     const deleteClient = () => {
         setClients(
             clients.filter(client => client.identificacion !== activeClient.identificacion)
         )
+        
+        clearActiveClient()
+
         Swal.fire({
             icon: 'success',    
             title: "Operación exitosa",

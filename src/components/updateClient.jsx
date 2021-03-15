@@ -8,12 +8,13 @@ import Button from "common/components/form/button"
 const AddClient = () => {
 
     const [ isUpdatingUser, setIsUpdatingUser ] = useState()
-    const { clients, setClients, activeClient, isUserActive } = useClientContext()
+    const { clients, setClients, activeClient, isUserActive, setActiveClient } = useClientContext()
 
     const updateClient = (client) => {
         const index = clients.findIndex( ({ identificacion}) => identificacion === activeClient.identificacion)
         if(index !== -1){
             setClients(clients.map( (nClient, nIndex) =>  nIndex === index? client: nClient  ))
+            setActiveClient(client)
         }
 
         setIsUpdatingUser(false)
